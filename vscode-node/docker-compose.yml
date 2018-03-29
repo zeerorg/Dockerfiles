@@ -1,0 +1,11 @@
+version: '2.0'
+services:
+  vscode_node:
+    build: .
+    environment:
+      - DISPLAY=unix$DISPLAY
+      - XAUTHORITY=$XAUTHORITY
+      - password=password
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/docker/vscode:/home/newuser

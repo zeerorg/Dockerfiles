@@ -45,6 +45,14 @@ RUN apt-get install -y \
         libxtst6 \
         --no-install-recommends
 
+# Install latest nodejs and yarn
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+	sudo apt-get update && \ 
+	sudo apt-get install -y nodejs yarn
+
+
 #WORKDIR /data
 ENV SHELL=/bin/bash
 
@@ -57,7 +65,4 @@ ENV HOME /home/newuser
 
 COPY start.sh /usr/bin/start.sh
 
-# ENTRYPOINT [ "code", "--wait" ]
-# ENTRYPOINT ["code", "--wait", "&&", "tail" , "-f",  "/dev/null"]
-# ENTRYPOINT ["/bin/bash"]
 ENTRYPOINT [ "/bin/bash", "/usr/bin/start.sh" ]
