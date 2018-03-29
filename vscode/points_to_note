@@ -1,0 +1,5 @@
+-1. cannot run as root, need to run as normal user
+-2. allow normal user to use X11
+3. should remain open after new directory is opened
+4. persist user data directory
+5. user should be able to install programs, hence data
