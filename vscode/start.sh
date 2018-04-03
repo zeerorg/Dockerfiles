@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "password" | sudo -S chown -R newuser:newuser /home/newuser
 set -o pipefail
 code
 sleep 2

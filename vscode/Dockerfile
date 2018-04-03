@@ -48,7 +48,8 @@ RUN apt-get install -y \
 #WORKDIR /data
 ENV SHELL=/bin/bash
 
-RUN useradd -ms /bin/bash newuser && usermod -aG sudo newuser
+RUN groupadd -g 1999 docker_data
+RUN useradd -ms /bin/bash newuser && usermod -aG sudo,docker_data newuser
 RUN echo newuser:password | chpasswd
 USER newuser
 WORKDIR /home/newuser

@@ -10,16 +10,13 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	gnupg \
 	sudo \
+	net-tools \
+	wget \
 	--no-install-recommends
 
-# Add the vscode debian repo
-RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | apt-key add -
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
-
 RUN apt-get update && apt-get -y install \
-	code \
 	git \
-	libgtk2.0-0 \
+	build-essential \
 	--no-install-recommends
 
 RUN apt-get install -y \
@@ -45,13 +42,13 @@ RUN apt-get install -y \
         libxtst6 \
         --no-install-recommends
 
-# Install latest nodejs and yarn
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
-	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
-	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
-	sudo apt-get update && \ 
-	sudo apt-get install -y nodejs yarn
+# download and extract pycharm
+RUN wget -O /opt/pycharm.tar.gz https://download.jetbrains.com/python/pycharm-community-2018.1.tar.gz
+RUN tar -xvzf /opt/pycharm.tar.gz
 
+# install python3 pip
+RUN sudo apt-get install -y python3-pip
+RUN sudo pip3 install virtualenv
 
 #WORKDIR /data
 ENV SHELL=/bin/bash
@@ -64,6 +61,7 @@ WORKDIR /home/newuser
 
 ENV HOME /home/newuser
 
-COPY start.sh /usr/bin/start.sh
-
-ENTRYPOINT [ "/bin/bash", "/usr/bin/start.sh" ]
+# ENTRYPOINT [ "code", "--wait" ]
+# ENTRYPOINT ["code", "--wait", "&&", "tail" , "-f",  "/dev/null"]
+# ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT [ "bash", "/pycharm-community-2018.1/bin/pycharm.sh" ]

@@ -1,13 +1,12 @@
 version: '2.0'
 services:
-  vscode_node:
+  vscode:
     build: .
     environment:
       - DISPLAY=unix$DISPLAY
       - XAUTHORITY=$XAUTHORITY
       - password=password
-    env_file:
-      - start-vars.env
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - $HOME/docker/vscode:/home/newuser
+      - $HOME/docker/data:/home/newuser
+      - /var/run/docker.sock:/var/run/docker.sock
