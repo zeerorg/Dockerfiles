@@ -1,6 +1,6 @@
 # Introduction
 
-This my collection of docker files for popular applications. It is heavily inspired from (Jessie Frazelle's images)[https://github.com/jessfraz/dockerfiles].
+This my collection of docker files for popular applications. It is heavily inspired from [Jessie Frazelle's images](https://github.com/jessfraz/dockerfiles).
 
 ## Why another ?
 There have been a lot of such repositories on Github, this repo differentiates from other repos by some points:
